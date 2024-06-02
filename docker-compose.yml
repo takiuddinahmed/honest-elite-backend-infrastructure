@@ -30,12 +30,15 @@ services:
     image: prom/prometheus
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/:/prometheus
     ports:
       - '9090:9090'
     networks:
       - app-network
     depends_on:
       - backend
+
+
   
   grafana:
     image: grafana/grafana
@@ -45,6 +48,8 @@ services:
       - app-network
     depends_on:
       - prometheus
+    volumes:
+      - grafana-storage:/var/lib/grafana
   
   mongodb:
     image: mongo:latest
@@ -66,3 +71,4 @@ networks:
  
 volumes:
   mongo_data:
+  grafana-storage:
