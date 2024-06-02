@@ -45,6 +45,17 @@ services:
       - app-network
     depends_on:
       - prometheus
+  
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"  
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: honestelite
+      MONGO_INITDB_ROOT_PASSWORD: asjdfh@#2321
+    volumes:
+      - mongo_data:/data/db
  
 networks:
   app-network:
